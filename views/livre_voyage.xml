@@ -52,7 +52,6 @@
 
                          />
 
-
                         <field name="state" widget="statusbar" statusbar_visible="draft,validated,cancel" />
                     </header>
                     <sheet>
@@ -69,7 +68,8 @@
                                 <field name="fleet"/>
                                 <field name="product" options="{'no_open': True, 'no_create': True}"/>
                                 <field name="chargement" />
-<!--                                <field name="file_bon_ids"/>-->
+                                <field name="file_bon" filename="file_nam" widget="binary" string="Inserer  le PV ici"/>
+                                    <field name="file_nam" invisible="1"/> <!-- Optionally hide the file name field -->
                             </group>
                             <group>
                                <field name="driver"/>

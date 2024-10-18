@@ -143,9 +143,9 @@
                 <attribute name="invisible">1</attribute>
             </xpath>
 
-<!--            <xpath expr="//field[@name='trailer_hook']" position="attributes">-->
-<!--                <attribute name="invisible">1</attribute>-->
-<!--            </xpath>-->
+            <xpath expr="//field[@name='trailer_hook']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
 
              <xpath expr="//field[@name='order_date']" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -162,6 +162,19 @@
         </field>
     </record>
 
+
+
+<!--         <record id="ir_cron_transport_action" model="ir.cron">-->
+<!--               <field name="name">YSG SMS Cron</field>-->
+<!--               <field name="model_id" ref="transport_app.model_sms_receiver"/>-->
+<!--               <field name="state">code</field>-->
+<!--               <field name="code">model.send_sms()</field>-->
+<!--               <field name="user_id" ref="base.user_root"/>-->
+<!--               <field name="interval_number">1</field>-->
+<!--               <field name="interval_type">days</field>-->
+<!--               <field name="numbercall">-1</field>-->
+<!--               <field name="priority">5</field>-->
+<!--        </record>-->
 
 
 </odoo>

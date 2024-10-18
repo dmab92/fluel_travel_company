@@ -9,6 +9,13 @@
     Module de gestion des chauffeurs
     Module de gestion de la maintenance des véhicules
     Module des rapports, des statistiques et du tableau de bord
+    
+    This application enables the management of any transport company, with a specialization in fuel transportation.
+It allows the management of pickup orders, reception reports, as well as handling all expenses related to a trip.
+The module also automatically manages reminders for the renewal of each vehicle's administrative documents, 
+after sending automatic SMS notifications as the expiration date approaches, along with many other features.
+    
+    
     """,
 
     'author': "MT CONSULTING SARL",
