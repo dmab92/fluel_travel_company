@@ -1,0 +1,57 @@
+<odoo>
+    <data>
+    <menuitem name="Transport Fluel App"
+      id="transport_app.menu_root"
+      web_icon="transport_app,static/description/icon.png" />
+
+
+          <menuitem name="Livres de Voyages"
+                  id="transport_app.livre"
+                  parent="transport_app.menu_root"
+                    action="transport_app.view_livre_voyage_action"
+                  sequence="1"
+                />
+
+         <menuitem name="Configuration"
+                  id="transport_app.config"
+                  parent="transport_app.menu_root"
+                  sequence="2"
+                />
+
+         <menuitem name="Les Pieces Administratives"
+                  id="transport_app.pieces"
+                  parent="transport_app.config"
+                   action="transport_app.view_piece_action"
+                  sequence="1"
+                />
+
+         <menuitem name="Les Receveurs de SMS"
+                   id="transport_app.sms"
+                   parent="transport_app.config"
+                   action="transport_app.view_sms_receiver_action"
+                  sequence="2"
+                />
+
+        <menuitem name="Les Depots"
+                  id="transport_app.depot"
+                  parent="transport_app.config"
+                  action="transport_app.view_depot_action"
+                  sequence="3"
+                />
+
+         <menuitem name="Les Produits"
+                  id="transport_app.prduct"
+                  parent="transport_app.config"
+                  action="transport_app.view_product_action"
+                  sequence="3"
+                />
+
+
+
+
+
+
+
+
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+
+access_livre_voyage,livre.voyage,model_livre_voyage,base.group_base_user,1,1,1,0
+
+access_transport_depot,transport.depot,model_transport_depot,base.group_base_user,1,1,1,0
+
+access_transport_produit,transport.produit,model_transport_produit,base.group_base_user,1,1,1,0
+
+access_pieces_admin,pieces.admin,model_pieces_admin,base.group_base_user,1,1,1,0
+
+access_pieces_lines,pieces.lines,model_pieces_lines,base.group_base_user,1,1,1,0
+
+access_sms_recevier,sms.recevier,model_sms_recevier,base.group_base_user,1,1,1,0
+
+

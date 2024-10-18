@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+<!--         <record id="ir_cron_send_sms" model="ir.cron">-->
+<!--            <field name="name">Envoyer des SMS</field>-->
+<!--            <field name="model_id" ref="model_nom_du_modele_ou_est_send_sms"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">model.send_sms()</field>-->
+<!--            <field name="interval_number">1</field>-->
+<!--            <field name="interval_type">days</field>-->
+<!--            <field name="nextcall">2024-10-19 06:00:00</field> &lt;!&ndash; Date et heure de la première exécution &ndash;&gt;-->
+<!--            <field name="numbercall">-1</field> &lt;!&ndash; Exécutions illimitées &ndash;&gt;-->
+<!--            <field name="doall" eval="False"/>-->
+<!--        </record>-->
+
+
+
+
+    </data>
+</odoo>

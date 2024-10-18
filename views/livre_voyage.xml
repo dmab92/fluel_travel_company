@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="ir.ui.view" id="view_livre_voyage_tree">
+            <field name="name">LIVRES DE VOYAGE</field>
+            <field name="model">livre.voyage</field>
+            <field name="arch" type="xml">
+                <tree string="Les Livre de Voyages">
+                    <field name="number"/>
+                    <field name="name"/>
+                    <field name="date_bon"/>
+                    <field name="client"/>
+                    <field name="fleet"/>
+                    <field name="driver"/>
+                    <field name="livraison"/>
+                    <field name="chargement"/>
+                    <field name="company_id"/>
+                    <field name="total_charges"/>
+                    <field name="amount"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_voyage_from">
+            <field name="name">Les LIVRES DE VOYAGES</field>
+            <field name="model">livre.voyage</field>
+            <field name="arch" type="xml">
+                <form string="LIVRES DE VOYAGE">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les LIVRES DE VOYAGE
+                    </p>
+                    <header>
+
+                         <button name="set_to_draft"
+                                 string="Remettre en broullion"
+                                 type="object"
+                                 invisible="state in ['draft']"
+
+                                icon="fa-cencel"
+                        />
+                          <button name="set_to_validated"
+                                string="Valider"
+                                  class="oe_highlight"
+                                icon="fa-check"
+                                type="object"
+                                  invisible="state not in ['draft']"
+                        />
+                         <button name="set_to_cancel"
+                                string="Annuler"
+                                type="object"
+                                  icon="fa-cencel"
+                                 invisible="state not in ['validated']"
+
+                         />
+
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,validated,cancel" />
+                    </header>
+                    <sheet>
+
+                         <div class="text-center">
+                            <h1>BON D'ENLEVEMENT</h1>
+                        </div>
+                        <field name="number" string="Livre No"/>
+                         <group string="BON D'ENLEVEMENT">
+                            <group>
+                                <field name="name"/>
+                                <field name="date_bon"/>
+                                <field name="client"/>
+                                <field name="fleet"/>
+                                <field name="product" options="{'no_open': True, 'no_create': True}"/>
+                                <field name="chargement" />
+<!--                                <field name="file_bon_ids"/>-->
+                            </group>
+                            <group>
+                               <field name="driver"/>
+                                <field name="livraison"/>
+                                <field name="price_unit"/>
+                                <field name="quantity"/>
+                                <field name="company_id" ptions="{'no_open': True, 'no_create': True}"/>
+
+                                <field name="amount"/>
+                            </group>
+                        </group>
+                        <newline />
+                         <div class="text-center">
+                            <h1>DEPENSES</h1>
+                        </div>
+
+                        <group string="DEPENSES">
+                            <group>
+                                <field name="consogaz_q" string="Consomation  Gazoil"/>
+                                <field name="consogaz_pu"/>
+                                <field name="consogaz"/>
+                                <field name="road_fees"/>
+                                <field name="bgt"/>
+                                <field name="barc"/>
+                                <field name="douane"/>
+                            </group>
+                            <group>
+
+                               <field name="lost"/>
+                                <field name="livraison"/>
+                                <field name="total_charges"/>
+                            </group>
+                        </group>
+
+                        <div class="text-center">
+                            <h1>PV DE RECEPTION</h1>
+                        </div>
+                        <group>
+
+                              <group>
+                                    <field name="file_data" filename="file_name" widget="binary" string="Inserer  le PV ici"/>
+                                    <field name="file_name" invisible="1"/> <!-- Optionally hide the file name field -->
+                                    <field name="date_pv"/>
+                                    <field name="product_r"/>
+                                    <field name="ncc"/>
+                                    <field name="nbbt"/>
+                                    <field name="nd15" />
+                                    <field name="company_id_pv"/>
+                            </group>
+                            <group>
+                                <field name="depot_id"/>
+                               <field name="product_r"/>
+                                <field name="distribution"/>
+                                <field name="ntt"/>
+                                <field name="nbc"/>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_livre_voyage_action" model="ir.actions.act_window">
+                <field name="name">Les livres Voyages</field>
+                <field name="res_model">livre.voyage</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_livre_voyage_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un voyage,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+            <!--_____________LES DEPOTS___________________-->
+        <record model="ir.ui.view" id="view_depot_tree">
+            <field name="name">Les Depots</field>
+            <field name="model">transport.depot</field>
+            <field name="arch" type="xml">
+                <tree string="Les Depots">
+                    <field name="name"/>
+                    <field name="town"/>
+                    <field name="country"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_depot_form">
+            <field name="name">Les Depots</field>
+            <field name="model">transport.depot</field>
+            <field name="arch" type="xml">
+                <form string="Les Depots">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Depots
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+
+                         <group string="Noms de la pieces">
+                            <group>
+                               <field name="name"/>
+                                <field name="town"/>
+                                <field name="country"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_depot_action" model="ir.actions.act_window">
+                <field name="name">Les Depots</field>
+                <field name="res_model">transport.depot</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_depot_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un depot,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+
+
+
+            <!--_____________LES PRODUITS -->
+        <record model="ir.ui.view" id="view_product_tree">
+            <field name="name">Les Produits</field>
+            <field name="model">transport.product</field>
+            <field name="arch" type="xml">
+                <tree string="Les Depots">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_product_form">
+            <field name="name">Les Produits</field>
+            <field name="model">transport.product</field>
+            <field name="arch" type="xml">
+                <form string="Les Depots">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur les Produits
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+
+                         <group string="Noms de la Produits">
+                            <group>
+                               <field name="name"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_product_action" model="ir.actions.act_window">
+                <field name="name">Les Produits</field>
+                <field name="res_model">transport.product</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_product_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un depot,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+
+
+</odoo>
+

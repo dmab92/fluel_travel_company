@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!--_____________LES PIECES___________________-->
+        <record model="ir.ui.view" id="view_piece_tree">
+            <field name="name">Les Pieces Administratives</field>
+            <field name="model">pieces.admin</field>
+            <field name="arch" type="xml">
+                <tree string="Les pieces admin">
+                    <field name="name"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_piece_form">
+            <field name="name">Les Pieces Administratives</field>
+            <field name="model">pieces.admin</field>
+            <field name="arch" type="xml">
+                <form string="Les Pieces Administratives">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Pieces Administratives
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+
+                         <group string="Noms de la pieces">
+                            <group>
+                                <field name="name"/>
+                                <field name="type"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_piece_action" model="ir.actions.act_window">
+                <field name="name">Les Pieces Administratives</field>
+                <field name="res_model">pieces.admin</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_piece_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer une pieces,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+    <!--_____________LES RECEPTEURS DE SMS_____________-->
+        <record model="ir.ui.view" id="view_sms_receiver_tree">
+            <field name="name">Les Recepteurs de SMS</field>
+            <field name="model">sms.recevier</field>
+            <field name="arch" type="xml">
+                <tree string="Les Recepteur de SMS">
+                    <field name="partner_id"/>
+                    <field name="tel"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sms_receiver_form">
+            <field name="name">Les Recepteurs de SMS</field>
+            <field name="model">sms.recevier</field>
+            <field name="arch" type="xml">
+                <form string="Les Recepteurs de SMS">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Recepteurs de SMS
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+
+                         <group string="Noms des receveurs de SMS">
+                            <group>
+                                <field name="partner_id"/>
+                                <field name="tel"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sms_receiver_action" model="ir.actions.act_window">
+                <field name="name">Les  Recepteurs de SMS</field>
+                <field name="res_model">sms.recevier</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_sms_receiver_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Les Recepteurs de SMS
+              </p><p>
+                Pour creer une pieces,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+ <!--_____________Insertion LES PIECES Dans le fleet___________________-->
+
+      <record id="fleet_vehicle_view_form_inherit" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+             <xpath expr="//page[@name='page_tax_info']" position="replace">
+                 <page string="Dossiers Administratifs du vehicule">
+                <field name="piece_ids">
+                   <tree  string="Les Pieces Administratives">
+                       <field name="piece_id"/>
+                       <field name="date_start"/>
+                       <field name="date_expi"/>
+                   </tree>
+                </field>
+                 </page>
+            </xpath>
+            <xpath expr="//field[@name='future_driver_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='plan_to_change_car']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+             <xpath expr="//field[@name='write_off_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+
+            <xpath expr="//field[@name='co2_standard']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+<!--            <xpath expr="//field[@name='trailer_hook']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+
+             <xpath expr="//field[@name='order_date']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='co2']" position="before">
+                 <label for="co2" string="Numero" />
+            </xpath>
+
+<!--            <xpath expr="//field[@name='location']" position="replace">-->
+<!--               <label for="location"  string="Capacite en L"  />-->
+<!--            </xpath>-->
+
+        </field>
+    </record>
+
+
+
+</odoo>
+
