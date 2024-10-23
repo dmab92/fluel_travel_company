@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="action_fleet_vehicle" model="ir.actions.act_window">
+            <field name="name">Vehicles</field>
+            <field name="res_model">fleet.vehicle</field>
+            <field name="view_mode">list,form</field> <!-- Set list view first -->
+        </record>
+
+    <!--  ADD VEHICULE ON REPAIR FORM VIEW-->
+
+    <record id="view_repair_order_form_inherit" model="ir.ui.view">
+        <field name="name">repair.order.form.vehicle</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <!-- Replace product_id with vehicle_id in form view -->
+            <field name="picking_id" position="before">
+                <field name="vehicle_id"/>
+                <field name="total_amount"/>
+
+            </field>
+
+            <xpath expr="//field[@name='parts_availability']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='under_warranty']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='tag_ids']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='picking_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Prestataire</attribute> <!-- Change the label here -->
+            </xpath>
+             <xpath expr="//field[@name='product_id']" position="attributes">
+                <attribute name="invisible">1</attribute> <!-- Set invisible to true -->
+            </xpath>
+
+<!--            <xpath expr="//field[@name='product_id']" position="replace">-->
+<!--               <label for="partner_id"  string="Prestataire" />-->
+<!--            </xpath>-->
+
+        </field>
+    </record>
+
+    <record id="view_repair_order_tree_inherit" model="ir.ui.view">
+        <field name="name">repair.order.tree.vehicle</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_tree"/>
+        <field name="arch" type="xml">
+            <!-- Replace product_id with vehicle_id in list view -->
+            <field name="partner_id" position="before">
+                <field name="vehicle_id"/>
+            </field>
+        </field>
+    </record>
+
+
+<!--    <template id="custom_web_footer" inherit_id="web.layout">-->
+<!--        <xpath expr="//div[@class='o_footer']" position="replace">-->
+<!--            <div class="o_footer">-->
+<!--                <p>-->
+<!--                    Powered by-->
+<!--                    <a href="https://www.mtconsultinng.com" target="_blank">-->
+<!--                        <strong>MT CONSULTING SARL</strong>-->
+<!--                    </a>-->
+<!--                </p>-->
+<!--            </div>-->
+<!--        </xpath>-->
+<!--    </template>-->
+
+</odoo>

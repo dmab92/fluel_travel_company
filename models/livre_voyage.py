@@ -54,7 +54,8 @@ class livre_voyage(models.Model):
                             help="Il s'agit du montant du transort du carbutant, quantite * pu",
                             )
     fleet = fields.Many2one("fleet.vehicle","Immatriculation Remorque")
-    driver= fields.Many2one('res.partner','Chauffeur')
+    fleet_t = fields.Many2one("fleet.vehicle", "Immatriculation Tracteur")
+    driver= fields.Many2one('fleet.driver','Chauffeur')
     livraison= fields.Many2one("transport.depot", "Lieu de livraison")
     chargement = fields.Many2one("transport.depot", "Lieu de Chargement")
     product = fields.Many2one("transport.product", "Produit")
@@ -74,7 +75,8 @@ class livre_voyage(models.Model):
                           help="il s'agit des frais  du  Bureau d'affretement rouitier Centrafricain ")
 
     douane = fields.Integer("Douane Cachet Corridor")
-    lost = fields.Integer("Volume de Collage en (L)")
+    fleet_bn = fields.Integer("Bureau National du Fleet")
+    lost = fields.Integer("Volume de Coulage en (L)")
     lost_c = fields.Integer("Pu Collage")
     amount_lost = fields.Integer("Montant Collage", compute="_amount_lost")
     total_charges = fields.Integer("Total Charges", compute="_get_total_price")
@@ -150,6 +152,7 @@ class livre_voyage(models.Model):
 
     def send_sms(self):
         vehicule_ids = self.env['fleet.vehicle'].search([])
+        driver_ids = self.env['fleet.driver'].search([])
         receiver_ids = self.env['sms.recevier'].search([])
         limit = [14, 7, 3]
         api_key = 'b0l5cGl6TE5JZmt6ZkdIZEZsTUQ='
@@ -162,6 +165,22 @@ class livre_voyage(models.Model):
                     for receiver in receiver_ids:
                         message = ' ATTENTION '+str(piece.piece_id.name)+' de la  ' + str(
                             vehicle.license_plate) + ' expire le ' + str(self.date_format(piece.date_expi)) + ' veillez penser à  renouveller.'
+                        sms_body = {
+                            'action': 'send-sms',
+                            'api_key': api_key,
+                            'to': '237' + receiver.tel,
+                            'from': senderID,
+                            'sms': message
+                        }
+                        final_url = url + "?" + urllib.parse.urlencode(sms_body)
+                        requests.get(final_url)
+
+        for driver in driver_ids:
+            for piece in driver.piece_ids:
+                if (piece.date_expi - dt.now().date()).days in limit:
+                    for receiver in receiver_ids:
+                        message = ' ATTENTION '+str(piece.piece_id.name)+' du chauffeur  ' + str(
+                            driver.partner_id.name) + ' expire le ' + str(self.date_format(piece.date_expi)) + ' veillez penser à  renouveller.'
                         sms_body = {
                             'action': 'send-sms',
                             'api_key': api_key,
@@ -186,3 +205,4 @@ class transport_produit(models.Model):
     _description = "Produit"
 
     name = fields.Char("Nom du Depot")
+

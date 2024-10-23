@@ -107,6 +107,76 @@
         </record>
 
 
+
+
+            <!--_____________LES CHAUFFEURS___________________-->
+        <record model="ir.ui.view" id="view_driver_tree">
+            <field name="name">Les Chauffeurs</field>
+            <field name="model">fleet.driver</field>
+            <field name="arch" type="xml">
+                <tree string="Les Chaufffeurs">
+                    <field name="partner_id"/>
+                    <field name="tel"/>
+<!--                    <field name="company_id"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_driver_form">
+             <field name="name">Les Chauffeurs</field>
+            <field name="model">fleet.driver</field>
+            <field name="arch" type="xml">
+                <form string="Les  Chauffeurs">
+                    <p class="oe_grey">
+                                    Cr&#233;ez / &#233;ditez vos donn&#233;es sur Les Chauffeurs
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+
+                         <group string="Informations sur le chaffeurs">
+                            <group>
+                                <field name="partner_id" string="Noms et Prénoms"/>
+                                <field name="tel"/>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Dossiers Administratifs du Chauffeur">
+                                <field name="piece_ids">
+                                   <tree  string="Dossiers Administratifs du Chauffeur" editable="top">
+                                       <field name="piece_id"/>
+                                       <field name="date_start"/>
+                                       <field name="date_expi"/>
+                                   </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_driver_action" model="ir.actions.act_window">
+                <field name="name">Les Chauffeurs</field>
+                <field name="res_model">fleet.driver</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_driver_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Voyages ici
+              </p><p>
+                Pour creer un Chaufeur,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+
  <!--_____________Insertion LES PIECES Dans le fleet___________________-->
 
       <record id="fleet_vehicle_view_form_inherit" model="ir.ui.view">
@@ -116,14 +186,27 @@
         <field name="arch" type="xml">
              <xpath expr="//page[@name='page_tax_info']" position="replace">
                  <page string="Dossiers Administratifs du vehicule">
-                <field name="piece_ids">
-                   <tree  string="Les Pieces Administratives">
+                <field name="piece_ids" >
+                   <tree  string="Les Pieces Administratives" editable="top">
                        <field name="piece_id"/>
                        <field name="date_start"/>
                        <field name="date_expi"/>
                    </tree>
                 </field>
                  </page>
+
+                   <div class="text-center">
+                            <h2>Cette section concerne uniquement l'assurance du vehicule</h2>
+                   </div>
+                    <field name="subscribteur" string="Subcripteur"/>
+                    <field name="insurance" string="Assurance"/>
+                    <field name="jaugeage_ids" >
+                           <tree  string="Le Certificate Jaujeage" editable="top">
+<!--                               <field name="name"/>-->
+<!--                               <field name="creu"/>-->
+                           </tree>
+                     </field>
+
             </xpath>
             <xpath expr="//field[@name='future_driver_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
@@ -161,20 +244,6 @@
 
         </field>
     </record>
-
-
-
-<!--         <record id="ir_cron_transport_action" model="ir.cron">-->
-<!--               <field name="name">YSG SMS Cron</field>-->
-<!--               <field name="model_id" ref="transport_app.model_sms_receiver"/>-->
-<!--               <field name="state">code</field>-->
-<!--               <field name="code">model.send_sms()</field>-->
-<!--               <field name="user_id" ref="base.user_root"/>-->
-<!--               <field name="interval_number">1</field>-->
-<!--               <field name="interval_type">days</field>-->
-<!--               <field name="numbercall">-1</field>-->
-<!--               <field name="priority">5</field>-->
-<!--        </record>-->
 
 
 </odoo>

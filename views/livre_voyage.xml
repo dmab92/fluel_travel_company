@@ -62,21 +62,22 @@
                         <field name="number" string="Livre No"/>
                          <group string="BON D'ENLEVEMENT">
                             <group>
-                                <field name="name"/>
-                                <field name="date_bon"/>
-                                <field name="client"/>
-                                <field name="fleet"/>
+                                <field name="name" readonly="state != 'draft'"/>
+                                <field name="date_bon" readonly="state != 'draft'"/>
+                                <field name="client" readonly="state != 'draft'"/>
+                                <field name="fleet" readonly="state != 'draft'"/>
+                                <field name="fleet_t" readonly="state != 'draft'"/>
                                 <field name="product" options="{'no_open': True, 'no_create': True}"/>
-                                <field name="chargement" />
+                                <field name="chargement" readonly="state != 'draft'" />
                                 <field name="file_bon" filename="file_nam" widget="binary" string="Inserer  le PV ici"/>
                                     <field name="file_nam" invisible="1"/> <!-- Optionally hide the file name field -->
                             </group>
                             <group>
-                               <field name="driver"/>
-                                <field name="livraison"/>
-                                <field name="price_unit"/>
-                                <field name="quantity"/>
-                                <field name="company_id" ptions="{'no_open': True, 'no_create': True}"/>
+                               <field name="driver" readonly="state != 'draft'"/>
+                                <field name="livraison" readonly="state != 'draft'"/>
+                                <field name="price_unit" readonly="state != 'draft'"/>
+                                <field name="quantity" readonly="state != 'draft'"/>
+                                <field name="company_id" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}"/>
 
                                 <field name="amount"/>
                             </group>
@@ -88,19 +89,20 @@
 
                         <group string="DEPENSES">
                             <group>
-                                <field name="consogaz_q" string="Consomation  Gazoil"/>
-                                <field name="consogaz_pu"/>
-                                <field name="consogaz"/>
-                                <field name="road_fees"/>
-                                <field name="bgt"/>
-                                <field name="barc"/>
-                                <field name="douane"/>
+                                <field name="consogaz_q" string="Consomation  Gazoil" readonly="state != 'draft'"/>
+                                <field name="consogaz_pu"  readonly="state != 'draft'" />
+                                <field name="consogaz" readonly="state != 'draft'"/>
+                                <field name="road_fees" readonly="state != 'draft'"/>
+                                <field name="bgt" readonly="state != 'draft'"/>
+                                <field name="barc" readonly="state != 'draft'"/>
+                                <field name="fleet_bn" readonly="state != 'draft'"/>
+                                <field name="douane" readonly="state != 'draft'"/>
                             </group>
                             <group>
 
-                               <field name="lost"/>
-                                <field name="livraison"/>
-                                <field name="total_charges"/>
+                               <field name="lost" readonly="state != 'draft'"/>
+                                <field name="livraison" readonly="state != 'draft'"/>
+                                <field name="total_charges" readonly="state != 'draft'"/>
                             </group>
                         </group>
 
@@ -112,10 +114,10 @@
                               <group>
                                     <field name="file_data" filename="file_name" widget="binary" string="Inserer  le PV ici"/>
                                     <field name="file_name" invisible="1"/> <!-- Optionally hide the file name field -->
-                                    <field name="date_pv"/>
-                                    <field name="product_r"/>
-                                    <field name="ncc"/>
-                                    <field name="nbbt"/>
+                                    <field name="date_pv" readonly="state != 'draft'"/>
+                                    <field name="product_r" readonly="state != 'draft'"/>
+                                    <field name="ncc" readonly="state != 'draft'"/>
+                                    <field name="nbbt" readonly="state != 'draft'"/>
                                     <field name="nd15" />
                                     <field name="company_id_pv"/>
                             </group>
@@ -123,9 +125,9 @@
                                 <field name="depot_id"/>
                                <field name="product_r"/>
                                 <field name="distribution"/>
-                                <field name="ntt"/>
-                                <field name="nbc"/>
-                                <field name="date"/>
+                                <field name="ntt" readonly="state != 'draft'"/>
+                                <field name="nbc" readonly="state != 'draft'"/>
+                                <field name="date" readonly="state != 'draft'"/>
                             </group>
                         </group>
                     </sheet>

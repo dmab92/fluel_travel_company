@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Transport Fluel App",
+    'name': "Transport Des Produits Petroliers App",
 
     'summary': "Module de gestion d'une entreprise de transport de produits petrolier",
 
@@ -28,13 +28,14 @@ after sending automatic SMS notifications as the expiration date approaches, alo
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet'],
+    'depends': ['base','fleet','repair'], #,'repair'
 
     # always loaded
     'data': [
         #'security/ir.model.access.csv',
         'data/data.xml',
         'views/livre_voyage.xml',
+        'views/repair_views.xml',
         'views/config.xml',
         'menu.xml'
         #'views/templates.xml',
