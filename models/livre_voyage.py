@@ -7,7 +7,7 @@ from datetime import datetime as dt
 class livre_voyage(models.Model):
     _name = 'livre.voyage'
     _description = "Bon Livre de Voyage"
-    __rec_name ='number'
+    _rec_name ='number'
 
 
     def _get_next_reference(self):
@@ -42,10 +42,11 @@ class livre_voyage(models.Model):
 
 #---------BON D'ENLEVEMENT------------------------------#
 
-    number = fields.Char("Voyage No", readonly="True", default=lambda self: self._get_next_reference())
+    number = fields.Char(readonly="True", default=lambda self: self._get_next_reference())
 
     name = fields.Char("Bon d'enlevement No")
     #date_register = fields.Date("Date d'enregitrement")
+    user_id = fields.Many2one('res.users', 'Enregistrer par :', readonly=1, default=lambda self: self.env.user)
     date_bon = fields.Date("Date du bon d'enlevement")
     client = fields.Many2one("res.partner", "Client")
     quantity = fields.Integer("Quantite")
@@ -60,10 +61,6 @@ class livre_voyage(models.Model):
     chargement = fields.Many2one("transport.depot", "Lieu de Chargement")
     product = fields.Many2one("transport.product", "Produit")
     company_id = fields.Many2one('res.company',"Transporteur")
-
-    #file_bon_ids = fields.Many2many('ir.attachment', string='Inserer  le bon ici')
-
-
 
 #-----------------DEPENSES-----------------------#
     consogaz_q = fields.Integer("Consomation  Gazoil(L)", )
@@ -106,8 +103,6 @@ class livre_voyage(models.Model):
 
     file_bon = fields.Binary(string="Inserer  le Bon ici", attachment=True)  # The field to store the file
     file_nam = fields.Char(string="File Name")  # Optional: to store the file's name
-
-    #file_pv_ids = fields.Many2many('ir.attachment', string='Inserer  le PV ici')
 
     @api.depends('lost', 'lost_c')
     def _amount_lost(self):
@@ -204,5 +199,5 @@ class transport_produit(models.Model):
     _name = 'transport.product'
     _description = "Produit"
 
-    name = fields.Char("Nom du Depot")
+    name = fields.Char("Nom du Produit")
 

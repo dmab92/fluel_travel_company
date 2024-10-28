@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+            <!--_____________LE SUIVI DES CHAUFFEURS______-->
+        <record model="ir.ui.view" id="view_driver_suivi_tree">
+            <field name="name">Suivi Chauffeurs</field>
+            <field name="model">driver.suivi</field>
+            <field name="arch" type="xml">
+                <tree string="Suivi des Chauffeurs">
+                    <field name="driver_id"/>
+                    <field name="company_id"/>
+                    <field name="date"/>
+                    <field name="date_end"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_driver_suivi_form">
+            <field name="name">Suivi des Chaufeurs</field>
+            <field name="model">driver.suivi</field>
+            <field name="arch" type="xml">
+                <form string="Les Incidents">
+                    <p class="oe_grey">
+                        Cr&#233;ez / &#233;ditez vos donn&#233;es sur les elements de suivi des chauffeurs
+                    </p>
+                    <header>
+
+                    </header>
+                    <sheet>
+                         <div class="text-left">
+                            <h1>SUIVI CHAUFFEUR</h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="driver_id"/>
+                                <field name="company_id"/>
+                            </group>
+                            <group>
+                                 <field name="date"/>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+
+                         <notebook>
+                             <page string="Incidents">
+                                <field name="incident_ids">
+                                   <tree string="Incidents">
+                                       <field name="name"/>
+                                       <field name="user_id"  readonly="1"/>
+                                       <field name="fleet"/>
+                                       <field name="date"/>
+                                       <field name="voyage"/>
+                                       <field name="fleet_t"/>
+                                       <field name="place"/>
+                                       <field name="details"/>
+                                   </tree>
+                                </field>
+                            </page>
+                         </notebook>
+                         <notebook>
+                             <page string="Formations">
+                                <field name="training_ids">
+                                   <tree  string="Formations">
+                                       <field name="user_id" readonly="1"/>
+                                       <field name="date"/>
+                                       <field name="name"/>
+                                       <field name="partner_id"/>
+                                   </tree>
+                                </field>
+                            </page>
+                         </notebook>
+                         <notebook>
+                             <page string="Sanctions">
+                                <field name="sancion_ids">
+                                   <tree  string="Les Sanctions">
+                                       <field name="user_id" readonly="1"/>
+                                       <field name="date"/>
+                                       <field name="name"/>
+                                       <field name="commnent"/>
+                                       <field name="amount"/>
+                                   </tree>
+                                </field>
+                            </page>
+                         </notebook>
+                         <notebook>
+                             <page string="Bonifications">
+                                <field name="bonif_ids">
+                                   <tree  string="Bonifications">
+                                       <field name="user_id" readonly="1"/>
+                                        <field name="date"/>
+                                       <field name="name"/>
+                                       <field name="amount" />
+                                       <field name="commnent"/>
+                                   </tree>
+                                </field>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_driver_suivi_action" model="ir.actions.act_window">
+                <field name="name">Suivi des Chauffeurs</field>
+                <field name="res_model">driver.suivi</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_driver_suivi_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Incidents ici
+              </p><p>
+                Pour creer un element de suivi d'un chaufeur,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+</odoo>

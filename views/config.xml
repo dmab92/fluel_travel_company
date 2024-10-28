@@ -117,7 +117,7 @@
                 <tree string="Les Chaufffeurs">
                     <field name="partner_id"/>
                     <field name="tel"/>
-<!--                    <field name="company_id"/>-->
+                    <field name="company_id"/>
                 </tree>
             </field>
         </record>
@@ -140,20 +140,22 @@
                                 <field name="partner_id" string="Noms et Prénoms"/>
                                 <field name="tel"/>
                                 <field name="company_id"/>
+                                <field name="help_driver"/>
                             </group>
                         </group>
 
                         <notebook>
                             <page string="Dossiers Administratifs du Chauffeur">
-                                <field name="piece_ids">
+                                <field name="piece_ids" domain="[('type', '=', 'driver')]">
                                    <tree  string="Dossiers Administratifs du Chauffeur" editable="top">
-                                       <field name="piece_id"/>
+                                       <field name="piece_id"  domain="[('type', '=', 'driver')]" />
                                        <field name="date_start"/>
                                        <field name="date_expi"/>
                                    </tree>
                                 </field>
                             </page>
                         </notebook>
+
                     </sheet>
                 </form>
             </field>
@@ -170,6 +172,24 @@
                 Creez vos Voyages ici
               </p><p>
                 Pour creer un Chaufeur,
+                cliquer sur le buton creer en haut a gauche de ce message
+              </p>
+            </field>
+        </record>
+
+
+    <record id="view_help_driver_action" model="ir.actions.act_window">
+                <field name="name">Les Aides Chauffeurs</field>
+                <field name="res_model">fleet.driver</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="view_id" ref="view_driver_tree"/>
+                <field name="view_mode">tree,form</field>
+                <field name="domain">[('help_driver', '=', True)]</field>
+                <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Creez vos Aides Chaufeurs ici
+              </p><p>
+                Pour creer un Aide Chaufeur,
                 cliquer sur le buton creer en haut a gauche de ce message
               </p>
             </field>
@@ -193,24 +213,34 @@
                        <field name="date_expi"/>
                    </tree>
                 </field>
+                     <field name="tel" />
                  </page>
 
-                   <div class="text-center">
-                            <h2>Cette section concerne uniquement l'assurance du vehicule</h2>
-                   </div>
-                    <field name="subscribteur" string="Subcripteur"/>
-                    <field name="insurance" string="Assurance"/>
-                    <field name="jaugeage_ids" >
+                 <page string="Assurance et Jaugeage">
+                     <group>
+                     <group>
+                         <field name="subscribteur" string="Subcripteur"/>
+                     </group>
+                     <group>
+                         <field name="insurance" string="Assurance"/>
+                     </group>
+                      </group>
+                     <field name="jaugeage_ids">
                            <tree  string="Le Certificate Jaujeage" editable="top">
-<!--                               <field name="name"/>-->
-<!--                               <field name="creu"/>-->
+                               <field name="name"/>
+                               <field name="creu"/>
                            </tree>
                      </field>
+                 </page>
+
 
             </xpath>
             <xpath expr="//field[@name='future_driver_id']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
+
+
+
             <xpath expr="//field[@name='plan_to_change_car']" position="attributes">
                 <attribute name="invisible">1</attribute>
             </xpath>
@@ -238,7 +268,13 @@
                  <label for="co2" string="Numero" />
             </xpath>
 
-<!--            <xpath expr="//field[@name='location']" position="replace">-->
+            <xpath expr="//field[@name='driver_id']" position="replace">
+               <field name="driverid"/>
+                <field name="company_id" string="Sociéte Chauffeur"/>
+            </xpath>
+
+
+<!--            <xpath expr="//field[@name='driver_id']" position="replace">-->
 <!--               <label for="location"  string="Capacite en L"  />-->
 <!--            </xpath>-->
 

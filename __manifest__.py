@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Transport Des Produits Petroliers App",
+    'name': "Transport Fluel App",
 
     'summary': "Module de gestion d'une entreprise de transport de produits petrolier",
 
@@ -37,15 +37,16 @@ after sending automatic SMS notifications as the expiration date approaches, alo
         'views/livre_voyage.xml',
         'views/repair_views.xml',
         'views/config.xml',
+        'views/driver_suivi.xml',
         'menu.xml'
         #'views/templates.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
+        #'demo/demo.xml',
     ],
     'installable': True,
     'application': True,
     'auto_install': False,
-}
 
+}

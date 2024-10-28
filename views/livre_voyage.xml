@@ -16,6 +16,7 @@
                     <field name="company_id"/>
                     <field name="total_charges"/>
                     <field name="amount"/>
+                    <field name="user_id"/>
                 </tree>
             </field>
         </record>
@@ -34,14 +35,13 @@
                                  string="Remettre en broullion"
                                  type="object"
                                  invisible="state in ['draft']"
-
-                                icon="fa-cencel"
+                                 icon="fa-cencel"
                         />
                           <button name="set_to_validated"
-                                string="Valider"
+                                  string="Valider"
                                   class="oe_highlight"
-                                icon="fa-check"
-                                type="object"
+                                  icon="fa-check"
+                                  type="object"
                                   invisible="state not in ['draft']"
                         />
                          <button name="set_to_cancel"
@@ -49,37 +49,37 @@
                                 type="object"
                                   icon="fa-cencel"
                                  invisible="state not in ['validated']"
-
                          />
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,validated,cancel" />
                     </header>
                     <sheet>
-
+                         <h2>  <group> <field name="number" string="Voyage No"/> </group>  </h2>
                          <div class="text-center">
                             <h1>BON D'ENLEVEMENT</h1>
                         </div>
-                        <field name="number" string="Livre No"/>
+
                          <group string="BON D'ENLEVEMENT">
                             <group>
+
                                 <field name="name" readonly="state != 'draft'"/>
                                 <field name="date_bon" readonly="state != 'draft'"/>
+                                <field name="company_id" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}"/>
                                 <field name="client" readonly="state != 'draft'"/>
                                 <field name="fleet" readonly="state != 'draft'"/>
                                 <field name="fleet_t" readonly="state != 'draft'"/>
                                 <field name="product" options="{'no_open': True, 'no_create': True}"/>
                                 <field name="chargement" readonly="state != 'draft'" />
-                                <field name="file_bon" filename="file_nam" widget="binary" string="Inserer  le PV ici"/>
-                                    <field name="file_nam" invisible="1"/> <!-- Optionally hide the file name field -->
+                                <field name="file_bon" filename="file_nam" readonly="state != 'draft'" widget="binary" string="Inserer  le PV ici"/>
+                                <field name="file_nam" invisible="1"/> <!-- Optionally hide the file name field -->
                             </group>
                             <group>
                                <field name="driver" readonly="state != 'draft'"/>
                                 <field name="livraison" readonly="state != 'draft'"/>
                                 <field name="price_unit" readonly="state != 'draft'"/>
                                 <field name="quantity" readonly="state != 'draft'"/>
-                                <field name="company_id" readonly="state != 'draft'" options="{'no_open': True, 'no_create': True}"/>
-
                                 <field name="amount"/>
+                                <field name="user_id" invisible="1"/>
                             </group>
                         </group>
                         <newline />
@@ -99,7 +99,6 @@
                                 <field name="douane" readonly="state != 'draft'"/>
                             </group>
                             <group>
-
                                <field name="lost" readonly="state != 'draft'"/>
                                 <field name="livraison" readonly="state != 'draft'"/>
                                 <field name="total_charges" readonly="state != 'draft'"/>
@@ -112,22 +111,24 @@
                         <group>
 
                               <group>
-                                    <field name="file_data" filename="file_name" widget="binary" string="Inserer  le PV ici"/>
+                                    <field name="file_data" filename="file_name"  readonly="state != 'draft'" widget="binary" string="Inserer  le PV ici"/>
                                     <field name="file_name" invisible="1"/> <!-- Optionally hide the file name field -->
                                     <field name="date_pv" readonly="state != 'draft'"/>
                                     <field name="product_r" readonly="state != 'draft'"/>
                                     <field name="ncc" readonly="state != 'draft'"/>
                                     <field name="nbbt" readonly="state != 'draft'"/>
-                                    <field name="nd15" />
-                                    <field name="company_id_pv"/>
+                                    <field name="nd15"  readonly="state != 'draft'"/>
+                                    <field name="company_id_pv" readonly="state != 'draft'"/>
                             </group>
                             <group>
-                                <field name="depot_id"/>
-                               <field name="product_r"/>
-                                <field name="distribution"/>
+                                <field name="date"  string ="Date de Depart"
+                                       readonly="state != 'draft'"/>
+                                <field name="depot_id" readonly="state != 'draft'"/>
+                               <field name="product_r" readonly="state != 'draft'"/>
+                                <field name="distribution" readonly="state != 'draft'"/>
                                 <field name="ntt" readonly="state != 'draft'"/>
                                 <field name="nbc" readonly="state != 'draft'"/>
-                                <field name="date" readonly="state != 'draft'"/>
+
                             </group>
                         </group>
                     </sheet>
@@ -214,7 +215,7 @@
             <field name="name">Les Produits</field>
             <field name="model">transport.product</field>
             <field name="arch" type="xml">
-                <tree string="Les Depots">
+                <tree string="Les Produits">
                     <field name="name"/>
                 </tree>
             </field>
