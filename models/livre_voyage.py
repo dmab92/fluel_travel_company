@@ -43,29 +43,27 @@ class livre_voyage(models.Model):
 #---------BON D'ENLEVEMENT------------------------------#
 
     number = fields.Char(readonly="True", default=lambda self: self._get_next_reference())
-
-    name = fields.Char("Bon d'enlevement No")
-    #date_register = fields.Date("Date d'enregitrement")
+    name = fields.Char("Bon d'enlevement No", required=1)
     user_id = fields.Many2one('res.users', 'Enregistrer par :', readonly=1, default=lambda self: self.env.user)
-    date_bon = fields.Date("Date du bon d'enlevement")
-    client = fields.Many2one("res.partner", "Client")
+    date_bon = fields.Date("Date du bon d'enlevement", required=1)
+    client = fields.Many2one("res.partner", "Client",required=1)
     quantity = fields.Integer("Quantite")
-    price_unit = fields.Integer("Pu")
+    price_unit = fields.Float("Pu")
     amount = fields.Integer("Montant Transport Carburant", compute="_amount_price",
                             help="Il s'agit du montant du transort du carbutant, quantite * pu",
                             )
-    fleet = fields.Many2one("fleet.vehicle","Immatriculation Remorque")
-    fleet_t = fields.Many2one("fleet.vehicle", "Immatriculation Tracteur")
-    driver= fields.Many2one('fleet.driver','Chauffeur')
-    livraison= fields.Many2one("transport.depot", "Lieu de livraison")
-    chargement = fields.Many2one("transport.depot", "Lieu de Chargement")
-    product = fields.Many2one("transport.product", "Produit")
-    company_id = fields.Many2one('res.company',"Transporteur")
+    fleet = fields.Many2one("fleet.vehicle","Immatriculation Remorque", required=1)
+    fleet_t = fields.Many2one("fleet.vehicle", "Immatriculation Tracteur", required=1)
+    driver= fields.Many2one('fleet.driver','Chauffeur', required=1)
+    livraison= fields.Many2one("transport.depot", "Lieu de livraison", required=1)
+    chargement = fields.Many2one("transport.depot", "Lieu de Chargement", required=1)
+    product = fields.Many2one("transport.product", "Produit", required=1)
+    company_id = fields.Many2one('res.company',"Transporteur", required=1)
 
 #-----------------DEPENSES-----------------------#
-    consogaz_q = fields.Integer("Consomation  Gazoil(L)", )
+    consogaz_q = fields.Integer(" Nombre de litre de Gazoil(L) Consommé")
     consogaz_pu = fields.Integer("PU Gazoil")
-    consogaz = fields.Integer("Consomation Gazoil", compute="_amount_gaz")
+    consogaz = fields.Integer("Consomation Gazoil", readonly=1, compute="_amount_gaz")
     road_fees= fields.Integer("Frais de Route")
     bgt=fields.Integer(" Frais Bureau de Gestion Terrestre", help="il s'agit des frais  du Bureau de Terrestre ")
     barc = fields.Integer(" Frais Bureau d'affretement rouitier Centrafricain",
@@ -74,6 +72,8 @@ class livre_voyage(models.Model):
     douane = fields.Integer("Douane Cachet Corridor")
     fleet_bn = fields.Integer("Bureau National du Fleet")
     lost = fields.Integer("Volume de Coulage en (L)")
+    #total_lost = fields.Float("Total Coulage")
+
     lost_c = fields.Integer("Pu Collage")
     amount_lost = fields.Integer("Montant Collage", compute="_amount_lost")
     total_charges = fields.Integer("Total Charges", compute="_get_total_price")
@@ -87,11 +87,12 @@ class livre_voyage(models.Model):
     #-------------------------------PV DE RECEPTION-------------------------------------------#
 
     date_pv = fields.Date("Date de recepion")
-    depot_id = fields.Many2one("transport.depot")
+    date_lv = fields.Date("Date de Livraison")
+    depot_id = fields.Many2one("transport.depot", string="Lieu de livraison")
     product_r = fields.Many2one("transport.product")
     #ncc = fields.Many2one("fleet.vehicle","Immatriculation Tracteur")
     nbbt = fields.Char("Numero BT")
-    ncc = fields.Char("Immatriculation Tracteur")
+    ncc = fields.Many2one("fleet.vehicle", "Immatriculation Tracteur")
     distribution = fields.Char("Distribution")
     ntt = fields.Char("No TT")
     nd15 = fields.Char("No D15")
@@ -104,10 +105,10 @@ class livre_voyage(models.Model):
     file_bon = fields.Binary(string="Inserer  le Bon ici", attachment=True)  # The field to store the file
     file_nam = fields.Char(string="File Name")  # Optional: to store the file's name
 
-    @api.depends('lost', 'lost_c')
+    @api.depends('lost', 'price_unit')
     def _amount_lost(self):
         for record in self:
-            record.amount_lost = record.lost * record.lost_c
+            record.amount_lost = record.lost * record.consogaz_pu
 
     @api.depends('quantity','price_unit')
     def _amount_price(self):
@@ -119,12 +120,15 @@ class livre_voyage(models.Model):
         for record in self:
             record.consogaz = record.consogaz_q * record.consogaz_pu
 
-    @api.depends('consogaz','douane','bgt','barc','consogaz')
+    @api.depends('consogaz','douane',
+                 'bgt','barc','consogaz',
+                 'road_fees','amount_lost',
+                 'fleet_bn')
     def _get_total_price(self):
         for record in self:
-            record.total_charges = record.douane + record.road_fees + record.bgt + record.barc + record.consogaz
-
-
+            record.total_charges = record.douane + record.road_fees + \
+                                   record.bgt + record.fleet_bn + record.barc \
+                                   +record.consogaz + record.amount_lost
     def set_to_draft(self):
         return self.write({'state': 'draft'})
 

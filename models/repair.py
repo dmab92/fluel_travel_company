@@ -19,7 +19,7 @@ class RepairOrder(models.Model):
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
-    product_price = fields.Float(string="Product Price", readonly=True)
+    product_price = fields.Float(string="Prix  ", readonly=True)
 
     @api.onchange('product_id')
     def _onchange_product_id(self):

@@ -33,6 +33,7 @@ after sending automatic SMS notifications as the expiration date approaches, alo
     # always loaded
     'data': [
         #'security/ir.model.access.csv',
+        'security/security.xml',
         'data/data.xml',
         'views/livre_voyage.xml',
         'views/repair_views.xml',

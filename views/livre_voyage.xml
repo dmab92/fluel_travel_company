@@ -9,7 +9,8 @@
                     <field name="name"/>
                     <field name="date_bon"/>
                     <field name="client"/>
-                    <field name="fleet"/>
+                    <field name="fleet" string="Remorque"/>
+                    <field name="fleet_t"  string="Tracteur"/>
                     <field name="driver"/>
                     <field name="livraison"/>
                     <field name="chargement"/>
@@ -36,6 +37,7 @@
                                  type="object"
                                  invisible="state in ['draft']"
                                  icon="fa-cencel"
+                                 groups="transport_app.group_respo_transport"
                         />
                           <button name="set_to_validated"
                                   string="Valider"
@@ -43,12 +45,14 @@
                                   icon="fa-check"
                                   type="object"
                                   invisible="state not in ['draft']"
+                                  groups="transport_app.group_transport,transport_app.group_respo_transport"
                         />
                          <button name="set_to_cancel"
                                 string="Annuler"
                                 type="object"
                                   icon="fa-cencel"
                                  invisible="state not in ['validated']"
+                                 groups="transport_app.group_respo_transport"
                          />
 
                         <field name="state" widget="statusbar" statusbar_visible="draft,validated,cancel" />
@@ -78,7 +82,7 @@
                                 <field name="livraison" readonly="state != 'draft'"/>
                                 <field name="price_unit" readonly="state != 'draft'"/>
                                 <field name="quantity" readonly="state != 'draft'"/>
-                                <field name="amount"/>
+                                <field name="amount" readonly="1"/>
                                 <field name="user_id" invisible="1"/>
                             </group>
                         </group>
@@ -91,17 +95,18 @@
                             <group>
                                 <field name="consogaz_q" string="Consomation  Gazoil" readonly="state != 'draft'"/>
                                 <field name="consogaz_pu"  readonly="state != 'draft'" />
-                                <field name="consogaz" readonly="state != 'draft'"/>
+                                <field name="consogaz" readonly="1"/>
                                 <field name="road_fees" readonly="state != 'draft'"/>
                                 <field name="bgt" readonly="state != 'draft'"/>
                                 <field name="barc" readonly="state != 'draft'"/>
                                 <field name="fleet_bn" readonly="state != 'draft'"/>
                                 <field name="douane" readonly="state != 'draft'"/>
+<!--                                <field name="livraison" readonly="state != 'draft'"/>-->
                             </group>
                             <group>
                                <field name="lost" readonly="state != 'draft'"/>
-                                <field name="livraison" readonly="state != 'draft'"/>
-                                <field name="total_charges" readonly="state != 'draft'"/>
+                                <field name="amount_lost" readonly="1"/>
+                                <field name="total_charges" readonly="1"/>
                             </group>
                         </group>
 

@@ -9,23 +9,27 @@
                     parent="transport_app.menu_root"
                     action="transport_app.view_livre_voyage_action"
                     sequence="1"
+                     groups="transport_app.group_transport,transport_app.group_respo_transport"
           />
         <menuitem name="Suivi Des Chauffeurs"
                   id="transport_app.suivi"
                   parent="transport_app.menu_root"
                   sequence="2"
+                  groups="transport_app.group_suivi_driver,transport_app.group_respo_suivi_driver"
                 />
                  <menuitem name="Liste des Chauffeurs"
                       id="transport_app.driver"
                       parent="transport_app.suivi"
                       action="transport_app.view_driver_action"
                       sequence="1"
+                           groups="transport_app.group_suivi_driver,transport_app.group_respo_suivi_driver"
                 />
                 <menuitem name="Liste Aides Chauffeurs"
                       id="transport_app.helpdriver"
                       parent="transport_app.suivi"
                       action="transport_app.view_help_driver_action"
                       sequence="2"
+                          groups="transport_app.group_suivi_driver,transport_app.group_respo_suivi_driver"
                     />
 
                  <menuitem name="Incidents-Formations-Santions-Bonifications"
@@ -33,6 +37,7 @@
                           parent="transport_app.suivi"
                           action="transport_app.view_driver_suivi_action"
                           sequence="3"
+                           groups="transport_app.group_suivi_driver,transport_app.group_respo_suivi_driver"
                         />
 
          <menuitem name="Parc automobile"
@@ -40,6 +45,7 @@
                     parent="transport_app.menu_root"
                     action="fleet.fleet_vehicle_action"
                     sequence="3"
+                   groups="transport_app.group_parc_auto,transport_app.group_respo_parc_auto"
           />
 
 
@@ -48,6 +54,8 @@
                   id="transport_app.config"
                   parent="transport_app.menu_root"
                   sequence="4"
+                  groups="transport_app.group_maintenance,transport_app.group_respo_maintenance"
+
                 />
 
          <menuitem name="Les Pieces Administratives"
@@ -55,16 +63,16 @@
                   parent="transport_app.config"
                    action="transport_app.view_piece_action"
                   sequence="1"
+                   groups="transport_app.group_respo_maintenance"
                 />
-
-
-
 
          <menuitem name="Les Receveurs de SMS"
                    id="transport_app.sms"
                    parent="transport_app.config"
                    action="transport_app.view_sms_receiver_action"
+                   groups="transport_app.group_respo_maintenance"
                   sequence="2"
+
                 />
 
         <menuitem name="Les Depots"
@@ -72,13 +80,15 @@
                   parent="transport_app.config"
                   action="transport_app.view_depot_action"
                   sequence="3"
+                  groups="transport_app.group_respo_maintenance"
                 />
 
          <menuitem name="Les Produits"
-                  id="transport_app.prduct"
-                  parent="transport_app.config"
-                  action="transport_app.view_product_action"
-                  sequence="3"
+                   id="transport_app.prduct"
+                   parent="transport_app.config"
+                   action="transport_app.view_product_action"
+                   sequence="3"
+                   groups="transport_app.group_respo_maintenance"
                 />
 
 
